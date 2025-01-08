@@ -3,7 +3,7 @@ name: desktop
 on:
   push:
     tags:
-      - "*"
+      - "v*.*.*" # Restrict to semantic versioning
     branches:
       - 'master'
     paths:
@@ -42,10 +42,10 @@ jobs:
         run: |
           npx todesktop build
 
-      # - name: 📦 Release Desktop App
-      #   if: startsWith(github.ref, 'refs/tags/')
-      #   run: |
-      #     npx todesktop release --latest --force
+      - name: 📦 Release Desktop App
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          npx todesktop release --latest --force
 
       - name: ⤵️ Get Desktop Apps
         if: startsWith(github.ref, 'refs/tags/')
